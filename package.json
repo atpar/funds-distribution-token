@@ -1,0 +1,28 @@
+{
+  "name": "funds-distribution-token",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/atpar/funds-distribution-token.git",
+  "author": [
+    "jo-es <johannes.escherich+github@atpar.io>"
+  ],
+  "license": "MIT",
+  "files": [
+    "artifacts/",
+    "contracts/"
+  ],
+  "scripts": {
+    "build": "npm run compile && npm run generate-artifacts",
+    "compile": "truffle compile",
+    "generate-artifacts": "./scripts/truffle-minimize.sh",
+    "test": "./scripts/test.sh"
+  },
+  "dependencies": {
+    "openzeppelin-solidity": "^2.3.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-bignumber": "^2.0.2",
+    "openzeppelin-test-helpers": "^0.1.2"
+  }
+}

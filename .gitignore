@@ -1,0 +1,10 @@
+# truffle
+build/
+artifacts/
+
+# npm
+node_modules/
+
+# Mac OS
+.DS_Store
+
