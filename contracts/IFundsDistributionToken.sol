@@ -7,13 +7,13 @@ interface IFundsDistributionToken {
 
 	/**
 	 * @dev Returns the total amount of funds a given address is able to withdraw currently.
-	 * @param owner Address of ClaimsToken holder
+	 * @param owner Address of FundsDistributionToken holder
 	 * @return A uint256 representing the available funds for a given account
 	 */
 	function withdrawableFundsOf(address owner) external view returns (uint256);
 
 	/**
-	 * @dev Withdraws all available funds for a claims token holder.
+	 * @dev Withdraws all available funds for a FundsDistributionToken holder.
 	 */
 	function withdrawFunds() external payable;
 
