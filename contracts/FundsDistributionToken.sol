@@ -11,12 +11,13 @@ import "./IFundsDistributionToken.sol";
 /** 
  * @title FundsDistributionToken
  * @author Johannes Escherich
- * @author Johannes Pfeffer
  * @author Roger-Wu
+ * @author Johannes Pfeffer
+ * @author Tom Lam
  * @dev A  mintable token that can represent claims on cash flow of arbitrary assets such as dividends, loan repayments, 
  * fee or revenue shares among large numbers of token holders. Anyone can deposit funds, token holders can withdraw 
  * their claims.
- * FundsDistributionToken implements the accounting logic. FDT-Extension contracts implement methods for depositing and 
+ * FundsDistributionToken (FDT) implements the accounting logic. FDT-Extension contracts implement methods for depositing and 
  * withdrawing funds in Ether or according to a token standard such as ERC20, ERC223, ERC777.
  */
 contract FundsDistributionToken is IFundsDistributionToken, ERC20Mintable {
