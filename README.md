@@ -1,11 +1,10 @@
-# FundsDistributionToken
+# Funds Distribution Token
 
 **DRAFT IMPLEMENTATION. NOT AUDITED. DO NOT USE FOR TOKENS WITH REAL VALUE AT THIS TIME**
 
-A token that can represent claims on any type of crypto cash flow.
+A token that can represent claims on any type of crypto cash flow. Anyone can deposit funds, token holders can withdraw their share. This is a reference implementation of #xxx.
 
-Usage examples are cash flows of assets such as dividends, loan repayments, fee or revenue shares among large numbers of token holders.
-Anyone can deposit funds, token holders can withdraw their share.
+This contract can be used for distributing cash flows of tokenized assets such as dividends, loan repayments, fee or revenue shares among large numbers of token holders.
 
 Based on [EIP1726](https://github.com/ethereum/EIPs/issues/1726) and [EIP1843](https://github.com/ethereum/EIPs/issues/1843).
 The accounting logic is based on the implementation of @roger-wu and foundational work of @arachnid.
