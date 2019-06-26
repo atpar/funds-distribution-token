@@ -1,10 +1,12 @@
-# Funds Distribution Token
+# Funds Distribution Token (FDT)
 
 **DRAFT IMPLEMENTATION. NOT AUDITED. DO NOT USE FOR TOKENS WITH REAL VALUE AT THIS TIME**
 
-A token that can represent claims on any type of crypto cash flow. Anyone can deposit funds, token holders can withdraw their share. This is a reference implementation of #xxx.
+*The Funds Distribution Token is an extension to Ethereum ERC20 tokens that adds the functionality to represent claims on any type of crypto cash flow. It will be submitted as an Ethereum Improvement Proposal (EIP)*
 
-This contract can be used for distributing cash flows of tokenized assets such as dividends, loan repayments, fee or revenue shares among large numbers of token holders.
+This repository contains a reference implementation of the proposed interface in solidity.
+
+When an ERC20 token implements the FDT-Interface, anyone can deposit funds and token holders can withdraw their share. This mechanism can be used for efficiently distributing cash flows of tokenized assets such as dividends, loan repayments, fee or revenue shares to large numbers of token holders.
 
 Based on [EIP1726](https://github.com/ethereum/EIPs/issues/1726) and [EIP1843](https://github.com/ethereum/EIPs/issues/1843).
 The accounting logic is based on the implementation of @roger-wu and foundational work of @arachnid.
@@ -15,41 +17,13 @@ The accounting logic is based on the implementation of @roger-wu and foundationa
 - FD-Tokens can be minted or burned (enables ERC1400 compatiblity)
 
 ## Architecture
-- FundsDistributionToken base contract:
+- FDT base contract:
 	- implements ERC20 standard interface
 	- contains methods for calculating distributions according to the amount of FDTs a user owns
-- FundsDistributionToken extension contracts:
+- FDT extension contracts:
 	- contains methods for depositing and withdrawing funds in Ether or according to a token standard
 	- provide compatibility for current and future token standards such as ERC20, ERC223, ERC777 and ERC1400
 
-## Interface
-```solidity
-interface FundsDistributionToken {
+## EIP draft and further details
 
-	/**
-	 * @dev Returns the total amount of funds a given address is able to withdraw currently.
-	 * @param owner Address of FundsDistributionToken holder
-	 * @return A uint256 representing the available funds for a given account
-	 */
-	function withdrawableFundsOf(address owner) external view returns (uint256);
-
-	/**
-	 * @dev Withdraws all available funds for a FundsDistributionToken holder.
-	 */
-	function withdrawFunds() external payable;
-
-	/**
-	 * @dev This event emits when new funds are distributed
-	 * @param by the address of the sender who distributed funds
-	 * @param fundsDistributed the amount of funds received for distribution
-	 */
-	event FundsDistributed(address indexed by, uint256 fundsDistributed);
- 
-	/**
-	 * @dev This event emits when distributed funds are withdrawn by a token holder.
-	 * @param by the address of the receiver of funds
-	 * @param fundsWithdrawn the amount of funds that were withdrawn
-	 */
-	event FundsWithdrawn(address indexed by, uint256 fundsWithdrawn);
-}
-```
+[The interface and the EIP's draft can be found here](EIP-DRAFT.md).
