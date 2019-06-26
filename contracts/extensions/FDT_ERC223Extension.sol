@@ -27,11 +27,8 @@ contract FDT_ERC223Extension is IFundsDistributionToken, FundsDistributionToken 
 	 * @dev Withdraws available funds for user.
 	 */
 	function withdrawFunds() 
-		external 
-		payable 
+		external
 	{
-		require(msg.value == 0, "ETHER_NOT_ACCEPTED");
-
 		uint256 withdrawableFunds = _prepareWithdraw();
 		
 		require(fundsToken.transfer(msg.sender, withdrawableFunds), "TRANSFER_FAILED");

@@ -10,8 +10,7 @@ contract FDT_ETHExtension is IFundsDistributionToken, FundsDistributionToken {
 	 * @notice Withdraws available funds for user.
 	 */
 	function withdrawFunds() 
-		external 
-		payable 
+		external
 	{
 		uint256 withdrawableFunds = _prepareWithdraw();
 		

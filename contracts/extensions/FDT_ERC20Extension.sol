@@ -38,10 +38,7 @@ contract FDT_ERC20Extension is IFundsDistributionToken, FundsDistributionToken {
 	 */
 	function withdrawFunds() 
 		external 
-		payable 
 	{
-		require(msg.value == 0, "ETHER_NOT_ACCEPTED");
-
 		uint256 withdrawableFunds = _prepareWithdraw();
 		
 		require(fundsToken.transfer(msg.sender, withdrawableFunds), "TRANSFER_FAILED");
