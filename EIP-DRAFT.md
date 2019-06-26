@@ -2,7 +2,7 @@
 
 eip: ERC-xxxx  
 title: Funds Distribution Standard  
-author: Johannes Pfeffer ([@jo-tud](https://github.com/jo-tud)), Roger Wu ([]()), Johannes Escherich ([@jo-es](https://github.com/jo-es)), Tom Lam ([]())  
+author: Johannes Pfeffer ([@jo-tud](https://github.com/jo-tud)), Roger Wu ((@Roger-Wu) <gsetcrw@gmail.com>), Johannes Escherich ([@jo-es](https://github.com/jo-es)), Tom Lam ((@erinata) <tomlam@uchicago.edu>)  
 discussions-to: #xxxx  
 status: Draft  
 type: Standards Track  
@@ -12,38 +12,38 @@ requires: ERC-20 (#20)
 superseeds: ERC-1726 (#1726), ERC-1843 (#1843)
 ---
 
-# Funds Distribution Standard EIP
+# Funds Distribution Token Standard (FDT)
 
 ## Simple Summary
-A standard for a token that represents claims on future cash flow of an asset such as dividends, loan repayments, fee or revenue shares among large numbers of token holders. Anyone can deposit funds, token holders can withdraw their claims.
+The FDT EIP is a specification for an extension to the ERC20 token interface. It adds functionality to the token that enables it to represent **claims on future cash flow of an asset** such as dividends, loan repayments, fee or revenue shares. The incoming funds can be distributed efficiently among large numbers of token holders. Anyone can deposit funds, token holders can withdraw their claims.
 
+Some key propertes of the standard:
 - Very simple interface
 - ERC-20 backwards compatible
-- Supports funds in Ether or in ERC223 compatible tokens
+- Supports funds in Ether or tokens
 - Efficient handling of fractional ownership of cash-flow claims
-- Correctly distributes cash flow honoring all token transfers
 - Scales well to many token holders and frequent transfers
 
+This EIP is based on and superseeds [EIP1726](#1726) and [EIP1843](#1843).
+
 ## Abstract
-![The Claims Token](res/ClaimsToken.png)
+![The Funds Distribution Token](res/ClaimsToken.png)
 
-This standard proposes an efficient solution for distributing recurring payments such as dividends, loan repayments, fee or revenue shares among large numbers of token holders. The token holders are seen as fractional owners of future cash flow. The payments can be in Ether or ERC20 tokens and are stored in the token's "fund". Holders of a claims token can transfer their tokens at any time and can still be sure that their past claims to the cash flow of the token will be honored. The interface provides methods to deposit funds to be distributed, to get information about available funds and to withdraw funds a token holder is entitled to.
+This standard proposes an efficient solution for distributing payments such as dividends, loan repayments, fee or revenue shares among large numbers of token holders. The token holders are seen as fractional owners of future cash flow. The payments can be in Ether or tokens and are stored as the token's "fund". FDT holders can transfer their tokens at any time and can be sure that their past claims to the cash flow of the token will be honored. The interface provides methods to deposit funds, to get information about available funds and to withdraw funds.
 
-This standard can handle funds in Ether or in ERC223 compatible tokens.
-
-This standard is backwards compatible with ERC20 (#20) and can easily be extended to be compatible with ERC-1400 (#1411) security token standards.
+FDT is backwards compatible with ERC20 (#20) and can easily be extended to be compatible with other standards such as ERC-777 (#777) or ERC-1400 (#1411) security token standards.
 
 ## Motivation
 In the DeFi and OpenFinance ecosystem assets such as debt positions, loans, derivatives and bonds are emerging. These assets incur future cash flows, e.g. repayments or dividends. Currently there is no standard for efficiently distributing claims on future cash flow of financial contracts among token holders. A clear and simple standard is needed to allow Dapps and exchanges to work with cash-flow producing tokens.
 
 ## Rationale
-Sending cash flow to a large group of token holders whenever it is received is limited by gas consumption. Thus, a solution must be used in which token holders actively withdraw the cumulative funds that they have a claim on. A token holder must be able to withdraw funds she has a claim on at any time. It must also be possible to transfer tokens at any time and the already accrued claims must still be honored. This requires some background accounting to be done in the transfer functions. The claims token standard solves this elegantly.
+Sending cash flow to a large group of token holders whenever it is received is limited by gas consumption. Thus, an efficient solution must be used in which token holders withdraw the funds that they have a claim on. A token holder must be able to withdraw funds she has a claim on at any time. It must also be possible to transfer tokens at any time and the already accrued claims must still be honored.
 
-Example: A bond is represented by 100 tokens. Alice owns all 100 of these tokens and Bob own zero. The bond yields 10 Ether. Alice has a claim on 100% of that cash flow because when the 10 Ether were received she owned all the tokens. She decides to not withdraw the tokens but wait until more has accumulated.
+## Specification
+The specification is identical to the interface. It consists of a compulsory and an optional part.
 
-Now Alice sends 50 tokens to Bob. Shortly after the bond yield another 10 Ether. Now Alice has is entitled to 15 Ether and Bob to 5 Ether. The ownership history is honored and Alice doesn't need to withdraw before she transfers the tokens.
-
-## Interface/Specification
+### Interface
+The mandatory part of the interface.
 ```Solidity
 
 interface IFundsDistributionToken {
@@ -75,11 +75,49 @@ interface IFundsDistributionToken {
 	event FundsWithdrawn(address indexed by, uint256 fundsWithdrawn);
 }
 ```
-## Optional Interface
-to be inserted
+### Optional Interface
+The optional part of the interface.
+```Solidity
+interface IFundsDistributionTokenOptional {
+
+	/** 
+	 * @notice Deposits funds to this contract.
+	 * The deposited funds may be distributed to other accounts.
+	 */
+	function depositFunds() external payable;
+
+	/** 
+	 * @notice Returns the total amount of funds that have been deposited to this contract but not yet distributed.
+	 */
+	function undistributedFunds() external view returns(uint256);
+
+	/** 
+	 * @notice Returns the total amount of funds that have been distributed.
+	 */
+	function distributedFunds() external view returns(uint256);
+
+	/** 
+	 * @notice Distributes undistributed funds to accounts.
+	 */
+	function distributeFunds() external;
+
+	/** 
+	 * @notice Deposits and distributes funds to accounts.
+	 * @param from The source of the funds.
+	 */
+	function depositAndDistributeFunds(address from) external payable;
+
+	/**
+	 * @dev This event MUST emit when funds are deposited to this contract.
+	 * @param by the address of the sender of who deposited funds.
+	 * @param fundsDeposited The amount of distributed funds.
+	 */
+	event FundsDeposited(address indexed by, uint256 fundsDeposited);
+}
+```
 
 ## Reference Implementation
-TBD
+There are many possible implementations for the FDT interface. [A reference implementation by the creators of the EIP can be found here](https://github.com/atpar/funds-distribution-token).
 
 ## Backwards Compatibility
 The standard is backwards compatible with ERC20 tokens.
@@ -88,5 +126,4 @@ The standard is backwards compatible with ERC20 tokens.
 Public domain via [CC0](https://creativecommons.org/publicdomain/zero/1.0/deed.en)
 
 ## Attribution
-The idea for the implementation of the claims token goes back to work originally done by [@Georgi87](https://github.com/Georgi87), [@ethers](https://github.com/ethers), [@miladmostavi](https://github.com/miladmostavi) and [@popra](https://github.com/popra) and was used in the [Tokit SingularDTVFund](https://github.com/Digital-Mob/singulardtv-tokitio-contracts) contracts.
-TODO: add @arachnid, bookypoobar, ...
+The idea for the implementation of the claims token goes back to work originally done by [@Georgi87](https://github.com/Georgi87), [@ethers](https://github.com/ethers), [@miladmostavi](https://github.com/miladmostavi) and [@popra](https://github.com/popra) and was used in the [Tokit SingularDTVFund](https://github.com/Digital-Mob/singulardtv-tokitio-contracts) contracts. It was also inspired by [PoWH3D](https://etherscan.io/address/0xB3775fB83F7D12A36E0475aBdD1FCA35c091efBe#code). [Foundational work](https://medium.com/@weka/dividend-bearing-tokens-on-ethereum-42d01c710657) was done by [@arachnid](https://github.com/Arachnid) [and](https://github.com/bokkypoobah/DividendPayingTokenContract) [@BokkyPooBah](https://github.com/bokkypoobah).
