@@ -17,27 +17,22 @@ superseeds: ERC-1726 (#1726), ERC-1843 (#1843)
 ## Simple Summary
 The FDT EIP is a specification for an extension to the ERC20 token interface. It adds functionality to the token that enables it to represent **claims on future cash flow of an asset** such as dividends, loan repayments, fee or revenue shares. The incoming funds can be distributed efficiently among large numbers of token holders. Anyone can deposit funds, token holders can withdraw their claims.
 
-Some key propertes of the standard:
+Some key properties of the standard:
 - Very simple interface
 - ERC-20 backwards compatible
 - Supports funds in Ether or tokens
-- Efficient handling of fractional ownership of cash-flow claims
-- Scales well to many token holders and frequent transfers
 
 This EIP is based on and superseeds [EIP1726](#1726) and [EIP1843](#1843).
 
 ## Abstract
 ![The Funds Distribution Token](res/ClaimsToken.png)
 
-This standard proposes an efficient solution for distributing payments such as dividends, loan repayments, fee or revenue shares among large numbers of token holders. The token holders are seen as fractional owners of future cash flow. The payments can be in Ether or tokens and are stored as the token's "fund". FDT holders can transfer their tokens at any time and can be sure that their past claims to the cash flow of the token will be honored. The interface provides methods to deposit funds, to get information about available funds and to withdraw funds.
+This EIP proposes a standard interface for distributing payments such as dividends, loan repayments, fee or revenue shares among token holders. The token holders are seen as fractional owners of future cash flow. The payments can be in Ether or tokens and are seen as the token's "fund". FDT holders can transfer their tokens at any time and can be sure that their past claims to the cash flow of the token will be honored. The interface provides methods to deposit funds, to get information about available funds and to withdraw funds.
 
 FDT is backwards compatible with ERC20 (#20) and can easily be extended to be compatible with other standards such as ERC-777 (#777) or ERC-1400 (#1411) security token standards.
 
-## Motivation
-In the DeFi and OpenFinance ecosystem assets such as debt positions, loans, derivatives and bonds are emerging. These assets incur future cash flows, e.g. repayments or dividends. Currently there is no standard for efficiently distributing claims on future cash flow of financial contracts among token holders. A clear and simple standard is needed to allow Dapps and exchanges to work with cash-flow producing tokens.
-
-## Rationale
-Sending cash flow to a large group of token holders whenever it is received is limited by gas consumption. Thus, an efficient solution must be used in which token holders withdraw the funds that they have a claim on. A token holder must be able to withdraw funds she has a claim on at any time. It must also be possible to transfer tokens at any time and the already accrued claims must still be honored.
+## Motivation & Rationale
+In the DeFi and OpenFinance ecosystem assets such as debt positions, loans, derivatives and bonds are emerging. These assets incur future cash flows, e.g. repayments or dividends. Currently there is no standard for handling claims on future cash flow of tokenized assets. A clear and simple standard is needed to allow Ethereum apps (dApps), wallets and exchanges to interact with cash-flow producing tokens.
 
 ## Specification
 The specification is identical to the interface. It consists of a compulsory and an optional part.
@@ -117,13 +112,11 @@ interface IFundsDistributionTokenOptional {
 ```
 
 ## Reference Implementation
-There are many possible implementations for the FDT interface. [A reference implementation by the creators of the EIP can be found here](https://github.com/atpar/funds-distribution-token).
+There are many possible implementations for the FDT interface. 
+A reference implementation by the creators of the EIP [can be found here](https://github.com/atpar/funds-distribution-token). It efficiently handles fractional ownership of cash-flow claims and scales well to many token holders and frequent transfers.
 
 ## Backwards Compatibility
 The standard is backwards compatible with ERC20 tokens.
 
 ## Copyright
 Public domain via [CC0](https://creativecommons.org/publicdomain/zero/1.0/deed.en)
-
-## Attribution
-The idea for the implementation of the claims token goes back to work originally done by [@Georgi87](https://github.com/Georgi87), [@ethers](https://github.com/ethers), [@miladmostavi](https://github.com/miladmostavi) and [@popra](https://github.com/popra) and was used in the [Tokit SingularDTVFund](https://github.com/Digital-Mob/singulardtv-tokitio-contracts) contracts. It was also inspired by [PoWH3D](https://etherscan.io/address/0xB3775fB83F7D12A36E0475aBdD1FCA35c091efBe#code). [Foundational work](https://medium.com/@weka/dividend-bearing-tokens-on-ethereum-42d01c710657) was done by [@arachnid](https://github.com/Arachnid) [and](https://github.com/bokkypoobah/DividendPayingTokenContract) [@BokkyPooBah](https://github.com/bokkypoobah).
