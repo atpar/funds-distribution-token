@@ -25,7 +25,6 @@ Some key properties of the standard:
 This EIP is based on and superseeds [EIP1726](#1726) and [EIP1843](#1843).
 
 ## Abstract
-![The Funds Distribution Token](res/ClaimsToken.png)
 
 This EIP proposes a standard interface for distributing payments such as dividends, loan repayments, fee or revenue shares among token holders. The token holders are seen as fractional owners of future cash flow. The payments can be in Ether or tokens and are seen as the token's "fund". FDT holders can transfer their tokens at any time and can be sure that their past claims to the cash flow of the token will be honored. The interface provides methods to deposit funds, to get information about available funds and to withdraw funds.
 
