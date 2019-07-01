@@ -1,0 +1,19 @@
+sudo: false
+group: beta
+language: node_js
+node_js:
+- '8'
+cache: yarn
+install: yarn
+script:
+- npm run build
+- npm run test
+deploy:
+  provider: npm
+  email: "$NPM_EMAIL"
+  api_key: "$NPM_TOKEN"
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: atpar/funds-distribution-token
+    branch: master

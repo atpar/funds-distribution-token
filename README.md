@@ -1,5 +1,7 @@
 # Funds Distribution Token (FDT)
 
+[![Build Status](https://travis-ci.org/atpar/funds-distribution-token.svg?branch=master)](https://travis-ci.org/atpar/funds-distribution-token)
+
 **DRAFT IMPLEMENTATION. NOT AUDITED. DO NOT USE FOR TOKENS WITH REAL VALUE AT THIS TIME**
 
 This repository contains a reference implementation of a token using the proposed Funds Distribution Standard, written in solidity.
