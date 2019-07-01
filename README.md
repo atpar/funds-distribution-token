@@ -1,6 +1,7 @@
 # Funds Distribution Token (FDT)
 
 [![Build Status](https://travis-ci.org/atpar/funds-distribution-token.svg?branch=master)](https://travis-ci.org/atpar/funds-distribution-token)
+[![npm version](http://img.shields.io/npm/v/funds-distribution-token.svg?style=flat)](https://npmjs.org/package/funds-distribution-token "View this project on npm")
 
 **DRAFT IMPLEMENTATION. NOT AUDITED. DO NOT USE FOR TOKENS WITH REAL VALUE AT THIS TIME**
 
