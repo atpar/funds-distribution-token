@@ -1,5 +1,7 @@
 # Funds Distribution Token (FDT)
 
+[![Build Status](https://travis-ci.org/atpar/funds-distribution-token.svg?branch=master)](https://travis-ci.org/atpar/funds-distribution-token)
+
 **DRAFT IMPLEMENTATION. NOT AUDITED. DO NOT USE FOR TOKENS WITH REAL VALUE AT THIS TIME**
 
 *The Funds Distribution Token is an extension to Ethereum ERC20 tokens that adds the functionality to represent claims on any type of crypto cash flow. It will be submitted as an Ethereum Improvement Proposal (EIP)*
