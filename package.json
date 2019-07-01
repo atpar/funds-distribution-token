@@ -14,7 +14,7 @@
   "scripts": {
     "build": "npm run compile && npm run generate-artifacts",
     "compile": "truffle compile",
-    "generate-artifacts": "./scripts/truffle-minimize.sh",
+    "generate-artifacts": "./scripts/truffle-minimize.sh ./build/contracts ./artifacts",
     "test": "./scripts/test.sh"
   },
   "dependencies": {
