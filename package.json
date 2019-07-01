@@ -1,11 +1,9 @@
 {
   "name": "funds-distribution-token",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "main": "index.js",
   "repository": "https://github.com/atpar/funds-distribution-token.git",
-  "author": [
-    "jo-es <johannes.escherich+github@atpar.io>"
-  ],
+  "author": "jo-es <johannes.escherich+github@atpar.io>",
   "license": "MIT",
   "files": [
     "artifacts/",
