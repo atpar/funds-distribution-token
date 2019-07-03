@@ -2,7 +2,7 @@
 
 eip: ERC-xxxx  
 title: Funds Distribution Standard  
-author: Johannes Pfeffer ([@jo-tud](https://github.com/jo-tud)), Roger Wu ((@Roger-Wu) <gsetcrw@gmail.com>), Johannes Escherich ([@jo-es](https://github.com/jo-es)), Tom Lam ((@erinata) <tomlam@uchicago.edu>)  
+author: Johannes Pfeffer ([@jo-tud](https://github.com/jo-tud)), Roger Wu ([@Roger-Wu](https://github.com/Roger-Wu)), Johannes Escherich ([@jo-es](https://github.com/jo-es)), Tom Lam ([@erinata](https://github.com/erinata))  
 discussions-to: #xxxx  
 status: Draft  
 type: Standards Track  
