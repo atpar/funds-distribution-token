@@ -15,14 +15,12 @@ contract FDT_ERC223Extension is IFundsDistributionToken, FundsDistributionToken 
 	}
 
 	constructor(
-		address initialShareholder,
 		string memory name, 
 		string memory symbol,
-		uint256 initialSupply,
 		IERC20 _fundsToken
 	) 
 		public 
-		FundsDistributionToken(initialShareholder, name, symbol, initialSupply)
+		FundsDistributionToken(name, symbol)
 	{
 		require(address(_fundsToken) != address(0), "FDT_ERC223Extension: INVALID_FUNDS_TOKEN_ADDRESS");
 

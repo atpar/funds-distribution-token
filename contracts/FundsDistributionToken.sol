@@ -36,16 +36,12 @@ contract FundsDistributionToken is IFundsDistributionToken, ERC20Detailed, ERC20
 
 
 	constructor (
-		address initialShareholder,
 		string memory name, 
-		string memory symbol,
-		uint256 initialSupply
+		string memory symbol
 	) 
 		public 
 		ERC20Detailed(name, symbol, 18) 
-	{
-		_mint(initialShareholder, initialSupply);
-	}
+	{}
 
 	/** 
 	 * prev. distributeDividends

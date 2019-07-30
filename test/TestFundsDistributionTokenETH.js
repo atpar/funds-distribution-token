@@ -10,10 +10,8 @@ contract('FDT_ETHExtension', function (accounts) {
   // before each `it`, even in `describe`
   beforeEach(async function () {
     this.fundsDistributionToken = await FDT_ETHExtension.new(
-      owner,
       'FundsDistributionToken',
-      'FDT',
-      '0'
+      'FDT'
     );
   });
 

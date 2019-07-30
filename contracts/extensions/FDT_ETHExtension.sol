@@ -7,13 +7,11 @@ import "../FundsDistributionToken.sol";
 contract FDT_ETHExtension is IFundsDistributionToken, FundsDistributionToken {
 
 	constructor(
-		address initialShareholder,
 		string memory name, 
-		string memory symbol,
-		uint256 initialSupply
+		string memory symbol
 	)
 		public
-		FundsDistributionToken(initialShareholder, name, symbol, initialSupply) 
+		FundsDistributionToken(name, symbol) 
 	{}
 
 	/**

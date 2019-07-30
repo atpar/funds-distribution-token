@@ -18,10 +18,8 @@ contract('FDT_ERC20Extension', function (accounts) {
     await this.fundsToken.transfer(anyone, ether('1000'));
 
     this.fundsDistributionToken = await FDT_ERC20Extension.new(
-      owner,
       'FundsDistributionToken',
       'FDT',
-      '0',
       this.fundsToken.address
     );
   });
