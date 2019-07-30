@@ -20,15 +20,21 @@ contract FDT_ERC20Extension is IFundsDistributionToken, FundsDistributionToken {
 
 
 	modifier onlyFundsToken () {
-		require(msg.sender == address(fundsToken), "UNAUTHORIZED_SENDER");
+		require(msg.sender == address(fundsToken), "FDT_ERC20Extension.onlyFundsToken: UNAUTHORIZED_SENDER");
 		_;
 	}
 
-	constructor(IERC20 _fundsToken) 
+	constructor(
+		address initialShareholder,
+		string memory name, 
+		string memory symbol,
+		uint256 initialSupply,
+		IERC20 _fundsToken
+	) 
 		public 
-		FundsDistributionToken()
+		FundsDistributionToken(initialShareholder, name, symbol, initialSupply)
 	{
-		require(address(_fundsToken) != address(0), "INVALID_FUNDS_TOKEN_ADDRESS");
+		require(address(_fundsToken) != address(0), "FDT_ERC20Extension: INVALID_FUNDS_TOKEN_ADDRESS");
 
 		fundsToken = _fundsToken;
 	}
@@ -41,7 +47,7 @@ contract FDT_ERC20Extension is IFundsDistributionToken, FundsDistributionToken {
 	{
 		uint256 withdrawableFunds = _prepareWithdraw();
 		
-		require(fundsToken.transfer(msg.sender, withdrawableFunds), "TRANSFER_FAILED");
+		require(fundsToken.transfer(msg.sender, withdrawableFunds), "FDT_ERC20Extension.withdrawFunds: TRANSFER_FAILED");
 
 		_updateFundsTokenBalance();
 	}

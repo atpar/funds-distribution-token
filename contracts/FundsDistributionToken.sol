@@ -1,5 +1,6 @@
 pragma solidity ^0.5.2;
 
+import "openzeppelin-solidity/contracts/token/ERC20/ERC20Detailed.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20Mintable.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "./external/math/SafeMathUint.sol";
@@ -20,18 +21,31 @@ import "./IFundsDistributionToken.sol";
  * FundsDistributionToken (FDT) implements the accounting logic. FDT-Extension contracts implement methods for depositing and 
  * withdrawing funds in Ether or according to a token standard such as ERC20, ERC223, ERC777.
  */
-contract FundsDistributionToken is IFundsDistributionToken, ERC20Mintable {
+contract FundsDistributionToken is IFundsDistributionToken, ERC20Detailed, ERC20Mintable {
 
 	using SafeMath for uint256;
 	using SafeMathUint for uint256;
 	using SafeMathInt for int256;
 
-	uint256 constant internal pointsMultiplier = 2**128; // optimize, see https://github.com/ethereum/EIPs/issues/1726#issuecomment-472352728
+	// optimize, see https://github.com/ethereum/EIPs/issues/1726#issuecomment-472352728
+	uint256 constant internal pointsMultiplier = 2**128;
 	uint256 internal pointsPerShare;
 
 	mapping(address => int256) internal pointsCorrection;
 	mapping(address => uint256) internal withdrawnFunds;
 
+
+	constructor (
+		address initialShareholder,
+		string memory name, 
+		string memory symbol,
+		uint256 initialSupply
+	) 
+		public 
+		ERC20Detailed(name, symbol, 18) 
+	{
+		_mint(initialShareholder, initialSupply);
+	}
 
 	/** 
 	 * prev. distributeDividends
@@ -47,7 +61,7 @@ contract FundsDistributionToken is IFundsDistributionToken, ERC20Mintable {
 	 *     and try to distribute it in the next distribution ....... todo implement  
 	 */
 	function _distributeFunds(uint256 value) internal {
-		require(totalSupply() > 0, "SUPPLY_IS_ZERO");
+		require(totalSupply() > 0, "FundsDistributionToken._distributeFunds: SUPPLY_IS_ZERO");
 
 		if (value > 0) {
 			pointsPerShare = pointsPerShare.add(
