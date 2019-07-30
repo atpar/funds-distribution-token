@@ -1,6 +1,6 @@
 {
   "name": "funds-distribution-token",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "index.js",
   "repository": "https://github.com/atpar/funds-distribution-token.git",
   "author": "jo-es <johannes.escherich+github@atpar.io>",
